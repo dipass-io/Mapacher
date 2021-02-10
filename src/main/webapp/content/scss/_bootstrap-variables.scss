@@ -8,33 +8,34 @@
 // Colors:
 // Grayscale and brand colors for use across Bootstrap.
 
-$primary: #3e8acc;
+$primary: #3b49df;
 $success: #28a745;
 $info: #17a2b8;
 $warning: #ffc107;
 $danger: #dc3545;
+$light: #506485;
 
 // Options:
 // Quickly modify global styling by enabling or disabling optional features.
 $enable-rounded: true;
-$enable-shadows: false;
-$enable-gradients: false;
+$enable-shadows: true;
+$enable-gradients: true;
 $enable-transitions: true;
-$enable-hover-media-query: false;
+$enable-hover-media-query: true;
 $enable-grid-classes: true;
 $enable-print-styles: true;
 
 // Components:
 // Define common padding and border radius sizes and more.
 
-$border-radius: 0.15rem;
+$border-radius: 0.85rem;
 $border-radius-lg: 0.125rem;
 $border-radius-sm: 0.1rem;
 
 // Body:
 // Settings for the `<body>` element.
 
-$body-bg: #e4e5e6;
+$body-bg: #fff;
 
 // Typography:
 // Font, line-height, and color for body text, headings, and more.
@@ -42,4 +43,6 @@ $body-bg: #e4e5e6;
 $font-size-base: 1rem;
 
 $dropdown-link-hover-color: white;
-$dropdown-link-hover-bg: #343a40;
+$dropdown-link-hover-bg: #506485;
+
+$btn-group-border-radius: 0.85rem;
