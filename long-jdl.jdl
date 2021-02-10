@@ -1,0 +1,507 @@
+entity Customer {
+	id Integer required,
+	company String maxlength(50),
+	lastName String maxlength(50),
+	firstName String maxlength(50),
+	emailAddress String maxlength(50),
+	jobTitle String maxlength(50),
+	businessPhone String maxlength(25),
+	homePhone String maxlength(25),
+	mobilePhone String maxlength(25),
+	faxNumber String maxlength(25),
+	address TextBlob,
+	city String maxlength(50),
+	stateProvince String maxlength(50),
+	zipPostalCode String maxlength(15),
+	countryRegion String maxlength(50),
+	webPage TextBlob,
+	notes TextBlob,
+	attachments Blob
+}
+
+entity Employee {
+	id Integer required,
+	company String maxlength(50),
+	lastName String maxlength(50),
+	firstName String maxlength(50),
+	emailAddress String maxlength(50),
+	jobTitle String maxlength(50),
+	businessPhone String maxlength(25),
+	homePhone String maxlength(25),
+	mobilePhone String maxlength(25),
+	faxNumber String maxlength(25),
+	address TextBlob,
+	city String maxlength(50),
+	stateProvince String maxlength(50),
+	zipPostalCode String maxlength(15),
+	countryRegion String maxlength(50),
+	webPage TextBlob,
+	notes TextBlob,
+	attachments Blob
+}
+
+entity InventoryTransactionType {
+	id Boolean required,
+	typeName String required maxlength(50)
+}
+
+entity InventoryTransaction {
+	id Integer required,
+	transactionCreatedDate Instant,
+	transactionModifiedDate Instant,
+	quantity Integer required,
+	comments String maxlength(255)
+}
+
+entity Invoice {
+	id Integer required,
+	invoiceDate Instant,
+	dueDate Instant,
+	tax BigDecimal,
+	shipping BigDecimal,
+	amountDue BigDecimal
+}
+
+entity OrderDetailer {
+	id Integer required,
+	quantity BigDecimal required,
+	unitPrice BigDecimal,
+	discount Double required,
+	dateAllocated Instant,
+	purchaseOrderId Integer,
+	inventoryId Integer
+}
+
+entity OrderDetailStatu {
+	id Integer required,
+	statusName String required maxlength(50)
+}
+
+entity Nworder {
+	id Integer required,
+	orderDate Instant,
+	shippedDate Instant,
+	shipName String maxlength(50),
+	shipAddress TextBlob,
+	shipCity String maxlength(50),
+	shipStateProvince String maxlength(50),
+	shipZipPostalCode String maxlength(50),
+	shipCountryRegion String maxlength(50),
+	shippingFee BigDecimal,
+	taxes BigDecimal,
+	paymentType String maxlength(50),
+	paidDate Instant,
+	notes TextBlob,
+	taxRate Double
+}
+
+entity OrderStatu {
+	id Boolean required,
+	statusName String required maxlength(50)
+}
+
+entity OrderTaxStatu {
+	id Boolean required,
+	taxStatusName String required maxlength(50)
+}
+
+entity Product {
+	supplierIds TextBlob,
+	id Integer required,
+	productCode String maxlength(25),
+	productName String maxlength(50),
+	description TextBlob,
+	standardCost BigDecimal,
+	listPrice BigDecimal required,
+	reorderLevel Integer,
+	targetLevel Integer,
+	quantityPerUnit String maxlength(50),
+	discontinued Boolean required,
+	minimumReorderQuantity Integer,
+	category String maxlength(50),
+	attachments Blob
+}
+
+entity PurchaseOrderDetailer {
+	id Integer required,
+	quantity BigDecimal required,
+	unitCost BigDecimal required,
+	dateReceived Instant,
+	postedToInventory Boolean required
+}
+
+entity PurchaseOrderStatu {
+	id Integer required,
+	status String maxlength(50)
+}
+
+entity PurchaseOrder {
+	id Integer required,
+	submittedDate Instant,
+	creationDate Instant,
+	expectedDate Instant,
+	shippingFee BigDecimal required,
+	taxes BigDecimal required,
+	paymentDate Instant,
+	paymentAmount BigDecimal,
+	paymentMethod String maxlength(50),
+	notes TextBlob,
+	approvedBy Integer,
+	approvedDate Instant,
+	submittedBy Integer
+}
+
+entity SalesReport {
+	groupBy String required maxlength(50),
+	display String maxlength(50),
+	title String maxlength(50),
+	filterRowSource TextBlob,
+	defaultFlag Boolean required
+}
+
+entity Shipper {
+	id Integer required,
+	company String maxlength(50),
+	lastName String maxlength(50),
+	firstName String maxlength(50),
+	emailAddress String maxlength(50),
+	jobTitle String maxlength(50),
+	businessPhone String maxlength(25),
+	homePhone String maxlength(25),
+	mobilePhone String maxlength(25),
+	faxNumber String maxlength(25),
+	address TextBlob,
+	city String maxlength(50),
+	stateProvince String maxlength(50),
+	zipPostalCode String maxlength(15),
+	countryRegion String maxlength(50),
+	webPage TextBlob,
+	notes TextBlob,
+	attachments Blob
+}
+
+entity Supplier {
+	id Integer required,
+	company String maxlength(50),
+	lastName String maxlength(50),
+	firstName String maxlength(50),
+	emailAddress String maxlength(50),
+	jobTitle String maxlength(50),
+	businessPhone String maxlength(25),
+	homePhone String maxlength(25),
+	mobilePhone String maxlength(25),
+	faxNumber String maxlength(25),
+	address TextBlob,
+	city String maxlength(50),
+	stateProvince String maxlength(50),
+	zipPostalCode String maxlength(15),
+	countryRegion String maxlength(50),
+	webPage TextBlob,
+	notes TextBlob,
+	attachments Blob
+}
+
+entity Currency {
+    name String, 
+    code String, 
+    symbol String
+}
+
+entity Country {
+    name String, 
+    code Long, 
+    flagImage BLOB
+}
+relationship OneToOne {
+    Country{currency} to Currency
+}
+
+entity City{
+    name String, 
+    code String, 
+    flagImage BLOB
+}
+relationship OneToMany {
+    Country{city} to City
+}
+
+entity Company {
+    name String, 
+    code Long, 
+    description String, 
+    address String, 
+    image BLOB
+}
+relationship OneToMany {
+    Company{country} to Country
+}
+
+
+entity Employee {
+    firstname String, lastname String, code Long, description String, address String, email String, 
+landPhoneNumber String, mobilePhoneNumber String, image BLOB, fileUploadDirectory String
+}
+
+relationship ManyToOne {
+    Employee{country} to Country,
+    Employee{company} to Company
+}
+
+entity Role {
+    name String, code Long, description String
+}
+relationship ManyToOne {
+Employee{role} to Role
+}
+
+entity Appointment {
+    name String, code Long, description String, address String, startDate LocalDate, endDate LocalDate
+}
+
+relationship OneToOne {
+    Customer{user(login) required} to User
+}
+relationship OneToOne {
+
+    Employee{employeeApointment} to Appointment
+}
+
+entity Group {
+    name String, code Long, description String
+}
+
+relationship ManyToMany {
+Group{employee} to Employee{group}
+Employee{group} to Group{employee}
+}
+
+
+
+entity SubscriptionPack {
+    name String, code Long, description String, price Double, renewPrice Double, period Double
+}
+relationship ManyToOne {
+    SubscriptionPack{currenty} to Currency
+}
+
+entity EmployeeSubscription {
+    subscriptionStart LocalDate, subscriptionEnd LocalDate
+}
+relationship OneToMany {
+    Employee{employeeSubscription} to EmployeeSubscription
+}
+relationship ManyToOne {
+    EmployeeSubscription{subscriptionPack} to SubscriptionPack
+}
+
+entity EmployeeSubscriptionInvoice {
+    paymentDetailsAtts String
+}
+relationship OneToOne {
+     EmployeeSubscription{employeeSubscriptionInvoice} to EmployeeSubscriptionInvoice
+}
+
+entity EmployeeSubscriptionInvoicePayment {
+    paymentDetailsAtts String
+}
+relationship OneToOne {
+    EmployeeSubscription{employeeSubscriptionInvoicePayment} to EmployeeSubscriptionInvoicePayment
+}
+
+entity EmployeeHolidays {
+    name String, description String, startDate LocalDate, endDate LocalDate
+}
+relationship ManyToOne {
+    Employee{employeeHolidays} to EmployeeHolidays
+}
+
+entity WorkPolicy {
+    name String, description String, mondayStartTime LocalDate, mondayEndTime LocalDate, mondayBreakStartTime LocalDate, mondayBreakEndTime LocalDate, tuesdayStartTime LocalDate, tuesdayEndTime LocalDate, tuesdayBreakStartTime LocalDate, tuesdayBreakEndTime LocalDate, wednesdayStartTime LocalDate, wednesdayEndTime LocalDate, wednesdayBreakStartTime LocalDate, wednesdayBreakEndTime LocalDate, thursdayStartTime LocalDate, thursdayEndTime LocalDate, thursdayBreakStartTime LocalDate, thursdayBreakEndTime LocalDate, fridayStartTime LocalDate, fridayEndTime LocalDate, fridayBreakStartTime LocalDate, fridayBreakEndTime LocalDate, saturdayStartTime LocalDate, saturdayEndTime LocalDate, saturdayBreakStartTime LocalDate, saturdayBreakEndTime LocalDate, sundayStartTime LocalDate, sundayEndTime LocalDate, sundayBreakStartTime LocalDate, sundayBreakEndTime LocalDate
+}
+
+
+entity Report {
+    name String, description String, createdOn LocalDate
+}
+relationship OneToMany {
+    Employee{employeeReport} to Report
+}
+
+entity ReportQuestion {
+    description String, createdOn LocalDate, dataType String, value String
+}
+relationship OneToMany {
+    Report{reportQuestion} to ReportQuestion
+}
+
+entity ReportQuestionOption {
+    description String
+}
+relationship OneToMany {
+    ReportQuestion{reportQuestionOption} to ReportQuestionOption
+}
+
+
+entity EmployeeNotification  {
+    byEmail Boolean, onDesktop Boolean, onEveryReport Boolean, onEveryAppointment Boolean, bySMS Boolean 
+}
+relationship OneToMany {
+    Employee{employeeNotification} to EmployeeNotification,
+    WorkPolicy{Employee} to Employee
+}
+
+entity EmployeeDocuments {
+    title String, description String, createdOn LocalDate
+}
+relationship OneToMany {
+    Employee{employeeDocuments} to EmployeeDocuments
+}
+
+entity Customer {
+    firstname String, lastname String, code Long, description String, address String, email String, 
+landPhoneNumber String, mobilePhoneNumber String, image BLOB, fileUploadDirectory String
+}
+
+relationship ManyToOne {
+    Customer{country} to Country,
+    Customer{company} to Company
+}
+
+entity Role {
+    name String, code Long, description String
+}
+relationship ManyToOne {
+Customer{role} to Role,
+Employee {role} to Role
+}
+
+entity Appointment {
+    name String, code Long, description String, address String, startDate LocalDate, endDate LocalDate
+}
+relationship OneToOne {
+    Customer{CustomerApointment} to Appointment
+}
+
+entity Group {
+    name String, code Long, description String
+}
+
+relationship ManyToMany {
+Group{Customer} to Customer{group}
+Customer{group} to Group{Customer}
+}
+
+
+
+entity SubscriptionPack {
+    name String, code Long, description String, price Double, renewPrice Double, period Double
+}
+relationship ManyToOne {
+    SubscriptionPack{currenty} to Currency
+}
+
+entity CustomerSubscription {
+    subscriptionStart LocalDate, subscriptionEnd LocalDate
+}
+relationship OneToMany {
+    Customer{CustomerSubscription} to CustomerSubscription
+}
+relationship ManyToOne {
+    CustomerSubscription{subscriptionPack} to SubscriptionPack
+}
+
+entity CustomerSubscriptionInvoice {
+    paymentDetailsAtts String
+}
+relationship OneToOne {
+     CustomerSubscription{CustomerSubscriptionInvoice} to CustomerSubscriptionInvoice
+}
+
+entity CustomerSubscriptionInvoicePayment {
+    paymentDetailsAtts String
+}
+relationship OneToOne {
+    CustomerSubscription{CustomerSubscriptionInvoicePayment} to CustomerSubscriptionInvoicePayment
+}
+
+entity CustomerHolidays {
+    name String, description String, startDate LocalDate, endDate LocalDate
+}
+relationship ManyToOne {
+    Customer{CustomerHolidays} to CustomerHolidays
+}
+
+
+
+
+
+entity WorkPolicy {
+    name String, description String, mondayStartTime LocalDate, mondayEndTime LocalDate, mondayBreakStartTime LocalDate, mondayBreakEndTime LocalDate, tuesdayStartTime LocalDate, tuesdayEndTime LocalDate, tuesdayBreakStartTime LocalDate, tuesdayBreakEndTime LocalDate, wednesdayStartTime LocalDate, wednesdayEndTime LocalDate, wednesdayBreakStartTime LocalDate, wednesdayBreakEndTime LocalDate, thursdayStartTime LocalDate, thursdayEndTime LocalDate, thursdayBreakStartTime LocalDate, thursdayBreakEndTime LocalDate, fridayStartTime LocalDate, fridayEndTime LocalDate, fridayBreakStartTime LocalDate, fridayBreakEndTime LocalDate, saturdayStartTime LocalDate, saturdayEndTime LocalDate, saturdayBreakStartTime LocalDate, saturdayBreakEndTime LocalDate, sundayStartTime LocalDate, sundayEndTime LocalDate, sundayBreakStartTime LocalDate, sundayBreakEndTime LocalDate
+}
+
+
+entity Report {
+    name String, description String, createdOn LocalDate
+}
+relationship OneToMany {
+    Customer{CustomerReport} to Report
+    Customer{Nworder} to Nworder
+}
+relationship OneToOne {
+    Nworder{PurchaseOrder} to PurchaseOrder
+    PurchaseOrder{OrderDetailStatu} to OrderDetailStatu
+    OrderDetailStatu{OrderTaxStatu} to OrderTaxStatu
+    OrderTaxStatu{OrderDetailer} to OrderDetailer
+    OrderDetailer{OrderStatu} to OrderStatu
+    OrderStatu{Invoice} to Invoice
+    Invoice{PurchaseOrderDetailer} to PurchaseOrderDetailer
+    PurchaseOrderDetailer{InventoryTransactionType} to InventoryTransactionType
+    InventoryTransactionType{InventoryTransaction} to InventoryTransaction
+    InventoryTransaction{Product} to Product
+    Product{Shipper} to Shipper
+    Product{Supplier} to Supplier
+    Shipper{Product} to PurchaseOrderStatu
+    PurchaseOrderDetailer{SalesReport} to SalesReport
+    InventoryTransaction{SalesReport} to SalesReport
+    Product{SalesReport} to SalesReport
+    PurchaseOrderStatu{SalesReport} to SalesReport
+
+    
+    
+
+    
+    
+}
+
+entity ReportQuestion {
+    description String, createdOn LocalDate, dataType String, value String
+}
+relationship OneToMany {
+    Report{reportQuestion} to ReportQuestion
+}
+
+entity ReportQuestionOption {
+    description String
+}
+relationship OneToMany {
+    ReportQuestion{reportQuestionOption} to ReportQuestionOption
+}
+
+
+entity CustomerNotification  {
+    byEmail Boolean, onDesktop Boolean, onEveryReport Boolean, onEveryAppointment Boolean, bySMS Boolean 
+}
+relationship OneToMany {
+    Customer{CustomerNotification} to CustomerNotification
+}
+
+entity CustomerDocuments {
+    title String, description String, createdOn LocalDate
+}
+relationship OneToMany {
+    Customer{CustomerDocuments} to CustomerDocuments
+}
+
+paginate all with pagination
+dto * with mapstruct
+service all with serviceImpl 
