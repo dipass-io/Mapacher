@@ -33,14 +33,23 @@ Navbar
 Logo styles
 ========================================================================== */
 .logo-img {
-  height: 45px;
-  width: 45px;
+  height: 55px;
+  width: 55px;
   display: inline-block;
   vertical-align: middle;
   background: url('../../../content/images/ai.svg') no-repeat center center;
   background-size: contain;
 }
 
+.rotate {
+  animation: rotate 4.5s linear infinite;
+}
+@keyframes rotate {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
 .navbar-brand {
-  font-size: 1.95rem;
+  font-size: 2.55rem;
 }
